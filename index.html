@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Özür Sayfası — Max ∞ Gülüstan</title>
 
-<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
@@ -18,187 +17,116 @@
   }
   *{box-sizing:border-box}
   body,html{height:100%;margin:0;font-family:'Poppins',sans-serif;background:#111;color:#fff;overflow-y:auto;-webkit-font-smoothing:antialiased}
-  /* full-screen video background */
-  .bg-wrap{position:fixed;inset:0;z-index:-2;overflow:hidden}
-  .bg-wrap video{width:100%;height:100%;object-fit:cover;filter:brightness(0.45) blur(2px)}
+
+  /* background image (use background.jpg in same folder or change path below) */
+  .bg-wrap{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    background-color:#111;
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-size:cover;
+    /* try repo image name first, then fallback to local /mnt/data if present */
+    background-image: url('background.jpg');
+  }
   /* subtle overlay gradient */
   .overlay{position:fixed;inset:0;background:linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.6));z-index:-1}
 
-  /* page layout container */
   .container{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
 
-  /* CARD */
   .card{width:95%;max-width:420px;background:transparent;border-radius:16px;padding:18px 18px 28px;text-align:center}
 
-  /* Pembe kutu (özür mesajı) */
   .pink-box{
     background:linear-gradient(180deg,#ffd7df,#ffc6d0);
-    color:#2b2b2b;
-    border-radius:14px;
-    padding:18px;
-    font-size:16px;
-    line-height:1.35;
-    margin-bottom:18px;
-    box-shadow:0 8px 24px rgba(0,0,0,0.35);
-    transform-origin:center;
-    animation:slideFadeIn 900ms ease both;
+    color:#2b2b2b;border-radius:14px;padding:18px;font-size:16px;line-height:1.35;margin-bottom:18px;
+    box-shadow:0 8px 24px rgba(0,0,0,0.35);transform-origin:center;animation:slideFadeIn .9s ease both;
   }
+  @keyframes slideFadeIn{from{opacity:0; transform: translateY(-12px) scale(.98)}to{opacity:1; transform: translateY(0) scale(1)}}
 
-  @keyframes slideFadeIn{
-    from{opacity:0; transform: translateY(-12px) scale(.98)}
-    to{opacity:1; transform: translateY(0) scale(1)}
-  }
+  .name{font-family:'Pacifico',cursive;font-size:30px;margin:6px 0 10px;color:#fff;text-shadow:0 6px 18px rgba(0,0,0,0.5);
+    animation:pulse 1500ms ease-in-out infinite;display:inline-block;background:linear-gradient(90deg,#ffd1df,#ff8ba0);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.08)}100%{transform:scale(1)}}
 
-  /* name animated */
-  .name{
-    font-family:'Pacifico',cursive;
-    font-size:30px;
-    margin:6px 0 10px;
-    color:#fff;
-    text-shadow:0 6px 18px rgba(0,0,0,0.5);
-    animation:pulse 1500ms ease-in-out infinite;
-    display:inline-block;
-    background:linear-gradient(90deg,#ffd1df,#ff8ba0);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-  }
-  @keyframes pulse{
-    0%{transform:scale(1)}
-    50%{transform:scale(1.08)}
-    100%{transform:scale(1)}
-  }
+  .subline{color:rgba(255,255,255,0.95);font-size:14px;margin-bottom:16px;opacity:0.95}
 
-  /* subtitle under name */
-  .subline{
-    color:rgba(255,255,255,0.95);
-    font-size:14px;
-    margin-bottom:16px;
-    opacity:0.95;
-  }
-
-  /* password area */
   .pw-row{display:flex;gap:10px;align-items:center;justify-content:center}
   input[type="password"]{
     flex:1;padding:12px 14px;border-radius:28px;border:2px solid rgba(255,255,255,0.12);
-    background:rgba(255,255,255,0.06);color:#fff;font-size:16px;outline:none;
+    background:rgba(255,255,255,0.06);color:#fff;font-size:16px;outline:none;text-align:center;
     transition:transform .15s ease, box-shadow .15s;
-    text-align:center;
   }
   input[type="password"]:focus{box-shadow:0 6px 20px rgba(0,0,0,0.5);transform:translateY(-2px)}
   .open-btn{
-    background:linear-gradient(180deg,var(--pink),var(--deep-pink));
-    border:none;padding:10px 14px;border-radius:28px;color:#fff;font-weight:600;
-    cursor:pointer;box-shadow:0 8px 30px rgba(255,100,140,0.18);
-    transform-origin:center;animation:buttonPop 2000ms ease-in-out infinite;
+    background:linear-gradient(180deg,var(--pink),var(--deep-pink));border:none;padding:10px 14px;border-radius:28px;color:#fff;font-weight:600;cursor:pointer;
+    box-shadow:0 8px 30px rgba(255,100,140,0.18);animation:buttonPop 2000ms ease-in-out infinite;
   }
-  @keyframes buttonPop{
-    0%{transform:translateY(0)}
-    50%{transform:translateY(-6px)}
-    100%{transform:translateY(0)}
-  }
+  @keyframes buttonPop{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
 
-  /* wrong hint */
   .hint{margin-top:12px;color:#ffdddd;background:rgba(255,255,255,0.06);padding:10px;border-radius:10px;display:inline-block;opacity:0;transform:translateY(6px);transition:all .3s}
   .hint.show{opacity:1;transform:translateY(0)}
 
-  /* page2 content */
   .page2{display:none;padding:40px 18px 60px;min-height:100vh;align-items:center;justify-content:flex-start}
   .page2.active{display:flex;flex-direction:column}
-  .page2 .title{
-    font-family:'Pacifico',cursive;font-size:42px;color:#ffd86a;margin-top:8px;margin-bottom:12px;
-    text-shadow:0 8px 30px rgba(0,0,0,0.6);
-    animation:scaleIn 700ms cubic-bezier(.2,.9,.3,1);
-  }
-  @keyframes scaleIn{
-    from{opacity:0; transform:scale(.88) translateY(-6px)}
-    to{opacity:1; transform:scale(1) translateY(0)}
-  }
-  .page2 .longtext{
-    max-width:700px;color:rgba(255,255,255,0.95);line-height:1.6;font-size:16px;margin-top:8px;text-align:center;
-    animation:fadeUp .7s ease both;
-  }
-  @keyframes fadeUp{
-    from{opacity:0;transform:translateY(10px)}
-    to{opacity:1;transform:translateY(0)}
-  }
+  .page2 .title{font-family:'Pacifico',cursive;font-size:42px;color:#ffd86a;margin-top:8px;margin-bottom:12px;text-shadow:0 8px 30px rgba(0,0,0,0.6);animation:scaleIn .7s both}
+  @keyframes scaleIn{from{opacity:0; transform:scale(.88) translateY(-6px)}to{opacity:1; transform:scale(1) translateY(0)}}
+  .page2 .longtext{max-width:700px;color:rgba(255,255,255,0.95);line-height:1.6;font-size:16px;margin-top:8px;text-align:center;animation:fadeUp .7s both}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
-  /* hearts floating */
   .hearts{position:fixed;left:0;right:0;top:0;bottom:0;pointer-events:none;z-index:2}
-  .heart{
-    position:absolute; width:18px;height:18px;background:radial-gradient(circle at 30% 30%, #fff6, #fff0), linear-gradient(135deg,#ff7fa2,#ffb6c1);
-    transform:rotate(-45deg);border-radius:6px;opacity:.9; animation:floatUp linear infinite;
-    box-shadow:0 6px 18px rgba(0,0,0,0.25);
-  }
-  @keyframes floatUp{
-    from{transform:translateY(0) rotate(-45deg);opacity:1}
-    to{transform:translateY(-260px) rotate(-10deg);opacity:0}
-  }
+  .heart{position:absolute;width:18px;height:18px;border-radius:6px;opacity:.9; animation:floatUp linear infinite;box-shadow:0 6px 18px rgba(0,0,0,0.25);
+    background:radial-gradient(circle at 30% 30%, #fff6, #fff0), linear-gradient(135deg,#ff7fa2,#ffb6c1);}
+  @keyframes floatUp{from{transform:translateY(0) rotate(-45deg);opacity:1}to{transform:translateY(-260px) rotate(-10deg);opacity:0}}
 
-  /* page3: music card */
   .page3{display:none;padding:40px 18px 80px;min-height:100vh;align-items:center;justify-content:flex-start}
   .page3.active{display:flex;flex-direction:column}
-  .music-card{
-    width:94%;max-width:520px;background:var(--card);color:var(--text);border-radius:18px;padding:22px;margin-top:24px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.4);align-self:center;
-    animation:slideFadeIn 700ms ease both;
-  }
+  .music-card{width:94%;max-width:520px;background:var(--card);color:var(--text);border-radius:18px;padding:22px;margin-top:22px;box-shadow:0 10px 30px rgba(0,0,0,0.4);align-self:center}
   .music-card .music-title{font-family:'Pacifico';font-size:28px;color:#e86b80;margin-bottom:8px}
-  .music-card .round-img{width:170px;height:170px;border-radius:50%;overflow:hidden;margin:12px auto;border:6px solid #ffdfe6;box-shadow:0 8px 30px rgba(0,0,0,0.25);transform:rotate(-2deg);animation:rotateIn 800ms ease both}
-  @keyframes rotateIn{from{opacity:0;transform:rotate(-14deg) scale(.9)}to{opacity:1;transform:rotate(0) scale(1)}}
-  .music-card .music-sub{font-size:16px;color:#666;margin-top:8px}
+  .round-img{width:170px;height:170px;border-radius:50%;overflow:hidden;margin:12px auto;border:6px solid #ffdfe6;box-shadow:0 8px 30px rgba(0,0,0,0.25)}
   .progress{height:8px;background:#eee;border-radius:8px;margin-top:14px;position:relative;overflow:hidden}
-  .progress .bar{height:100%;width:0%;background:linear-gradient(90deg,#ff8ba0,#ffd1df)}
+  .progress .bar{height:100%;width:0%;background:linear-gradient(90deg,#ff8ba0,#ffd1df);transition:width .2s linear}
   .player-row{display:flex;align-items:center;justify-content:center;margin-top:18px}
-  .play-btn-large{background:linear-gradient(180deg,#ff9aa8,#ff6b81);width:70px;height:70px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:none;font-size:30px;color:#fff;box-shadow:0 12px 30px rgba(255,100,140,0.18);cursor:pointer;outline:none;transform-origin:center;animation:pop 1800ms ease-in-out infinite}
+  .play-btn-large{background:linear-gradient(180deg,#ff9aa8,#ff6b81);width:70px;height:70px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:none;font-size:30px;color:#fff;box-shadow:0 12px 30px rgba(255,100,140,0.18);cursor:pointer;outline:none;transform-origin:center;transition:transform .15s ease}
+  .play-btn-large.pulse{animation:pop 1400ms ease-in-out infinite}
   @keyframes pop{0%{transform:scale(1)}50%{transform:scale(.96)}100%{transform:scale(1)}}
 
   .time-row{display:flex;justify-content:space-between;margin-top:8px;color:#777;font-size:14px}
   .song-info{padding:8px 10px}
 
-  /* counters in page3 top */
-  .counter-wrap{display:flex;gap:12px;justify-content:center;margin-top:6px}
+  .counter-wrap{display:flex;gap:12px;justify-content:center;margin-top:8px}
   .counter{background:#ffdfe6;padding:16px;border-radius:12px;width:95px;min-height:86px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,0.15)}
   .counter .num{font-size:24px;font-weight:700;color:#e85674}
   .counter .lbl{font-size:12px;color:#6b6b6b;margin-top:6px}
 
-  /* responsive */
   @media (max-width:420px){
     .name{font-size:26px}
     .page2 .title{font-size:34px}
     .music-card .music-title{font-size:22px}
     .round-img{width:140px;height:140px}
   }
-
-  /* small utility */
   .hidden{display:none}
   a.fake-link{color:#fff;text-decoration:underline;cursor:pointer}
 </style>
 </head>
 <body>
 
-<!-- background video (from uploaded file path) -->
-<div class="bg-wrap">
-  <video autoplay muted loop playsinline id="bgvideo">
-    <source src="/mnt/data/d8b54f700238527f442d924439ff99bb.mp4" type="video/mp4">
-    <!-- If video missing, fallback color stays -->
-  </video>
-</div>
+<!-- background image wrapper (replace background.jpg with your uploaded image if needed) -->
+<div class="bg-wrap" id="bgWrap"></div>
 <div class="overlay"></div>
 
-<!-- floating hearts -->
 <div class="hearts" id="hearts"></div>
 
-<!-- PAGE 1: password card -->
+<!-- PAGE 1 -->
 <main class="container" id="page1">
   <div class="card">
     <div class="pink-box" id="pinkBox">
-      <!-- custom message -->
       23 ne sen govnune degdim aýym 😞... alyan demim haram bolsun😓 yone Hudaý ba yüregimden söýýin seni Bagyshla...❤️‍🩹
     </div>
 
     <div class="name" id="nameAnim">Max ∞ Gülüstan</div>
 
-    <div class="subline">Söýýýän aýymm seni.. Aşaga Söygüli bolon günimizi yaz 00.00.0000</div>
+    <div class="subline">Söýýýan aýymm seni.. Aşaga Söygüli bolon günimizi yaz 00.00.0000</div>
 
     <div class="pw-row" style="margin-top:12px;">
       <input id="pw" type="password" placeholder="Özel şifreniz" autocomplete="off" />
@@ -206,16 +134,14 @@
     </div>
 
     <div class="hint" id="wrongHint">Yadyňdan cykarmadyn dami😖</div>
-
-    <div style="margin-top:18px;font-size:12px;color:rgba(255,255,255,0.6)">Şifre: <strong>22.08.2025</strong></div>
+    <!-- Şifre gösterimini kaldırdık (görünmez) -->
   </div>
 </main>
 
-<!-- PAGE 2: romantic text -->
+<!-- PAGE 2 -->
 <section id="page2" class="page2">
   <div style="width:95%;max-width:760px;text-align:center;margin:auto">
-    <div class="title">Söýýän senii!</div>
-
+    <div class="title">Söýýan senii!</div>
     <div class="longtext">
       Naçe maňlaýym salyonny diýsemde Allam sana dushdyrdy meni aýymm.
       Durmuşumdaky iň govy pursat sen, iň gerekli melegim sen..
@@ -223,30 +149,28 @@
       Yüregimdaki yerin hiiiç haçan dolmoz aýymm..
       ömrümün sonuna çenlide söýerin seni....❤️‍🩹
     </div>
-    <div style="margin-top:26px">
-      <a class="fake-link" id="downLink">Aşağı kaydır →</a>
-    </div>
+    <div style="margin-top:26px"><a class="fake-link" id="downLink">Aşağı kaydır →</a></div>
   </div>
 </section>
 
-<!-- PAGE 3: counter + music card -->
+<!-- PAGE 3 -->
 <section id="page3" class="page3">
   <div style="width:95%;max-width:820px;margin:auto;text-align:center">
     <h2 style="font-family:'Pacifico';font-size:32px;color:#e86b80;margin-bottom:6px">Birlikte Geçirdigimiz Süre</h2>
 
     <div class="counter-wrap" style="margin-top:8px">
       <div class="counter"><div class="num" id="days">0</div><div class="lbl">GÜN</div></div>
-      <div class="counter"><div class="num" id="hours">0</div><div class="lbl">SAAT</div></div>
-      <div class="counter"><div class="num" id="minutes">0</div><div class="lbl">DAKİKA</div></div>
+      <div class="counter"><div class="num" id="hours">00</div><div class="lbl">SAAT</div></div>
+      <div class="counter"><div class="num" id="minutes">00</div><div class="lbl">DAK</div></div>
+      <div class="counter"><div class="num" id="seconds">00</div><div class="lbl">SN</div></div>
     </div>
 
     <div class="music-card" style="margin-top:22px">
       <div class="music-title">Keşkelerle Süslenen Sonbahar</div>
 
-      <div class="round-img">
-        <!-- use background video frame as image by reusing video tag visually -->
-        <img src="/mnt/data/d8b54f700238527f442d924439ff99bb.mp4" alt="cover" onerror="this.style.display='none'">
-        <!-- If image not valid, we'll show a circular play icon styling via CSS fallback -->
+      <div class="round-img" id="cover">
+        <!-- if you want a cover image, place cover.jpg in same folder and update -->
+        <img src="cover.jpg" alt="cover" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'">
         <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:36px">❤</div>
       </div>
 
@@ -259,11 +183,11 @@
 
         <div class="time-row">
           <span id="tcur">0:00</span>
-          <span id="tdur">2:31</span>
+          <span id="tdur">0:00</span>
         </div>
 
         <div class="player-row">
-          <button class="play-btn-large" id="playBtn">▶</button>
+          <button class="play-btn-large pulse" id="playBtn">▶</button>
         </div>
       </div>
     </div>
@@ -271,15 +195,11 @@
   </div>
 </section>
 
-<!-- hidden audio (no file provided - using placeholder tone via data URI optional).
-     You can replace src with a real mp3 file URL later.
--->
-<audio id="audio" preload="auto">
-  <!-- small silent fallback or you can set a real song URL -->
-</audio>
+<!-- audio: kullanıcının yüklediği mp3 yolu burada (gerekirse repo'ya kopyala ve yolu değiştir) -->
+<audio id="audio" preload="auto" src="/mnt/data/Keşkelerle Süslenen Sonbaharlar _ Elvedayla Süslenmiş Bir Yarının Dünündeyim - Mesth _ Sonnur(MP3_160K).mp3"></audio>
 
 <script>
-/* ---------- Page logic: password check ---------- */
+/* ---------- PASSWORD ---------- */
 const password = '22.08.2025';
 const pwInput = document.getElementById('pw');
 const openBtn = document.getElementById('openBtn');
@@ -289,127 +209,93 @@ const page2 = document.getElementById('page2');
 const page3 = document.getElementById('page3');
 const downLink = document.getElementById('downLink');
 
-function showWrong(){
-  wrongHint.classList.add('show');
-  setTimeout(()=> wrongHint.classList.remove('show'), 3000);
-}
+function showWrong(){ wrongHint.classList.add('show'); setTimeout(()=> wrongHint.classList.remove('show'),3000); }
 
-/* check on button or enter */
 openBtn.addEventListener('click', tryPw);
-pwInput.addEventListener('keydown', (e)=>{
-  if(e.key === 'Enter') tryPw();
-});
+pwInput.addEventListener('keydown', (e)=>{ if(e.key === 'Enter') tryPw(); });
 
 function tryPw(){
   const val = pwInput.value.trim();
   if(val === password){
-    // success: show page2
     page1.style.display='none';
     page2.classList.add('active');
-    // start some page2 entry animations or spawn hearts
     spawnHearts(8);
-    // scroll to top
     window.scrollTo({top:0,behavior:'smooth'});
-    // reveal page3 when user scrolls or click link
   } else {
-    showWrong();
-    pwInput.value='';
+    showWrong(); pwInput.value='';
   }
 }
 
-/* link to scroll down to page3 */
+/* ---------- reveal page3 ---------- */
 downLink.addEventListener('click', ()=>{
   page3.classList.add('active');
-  // smooth scroll
-  setTimeout(()=> {
-    page3.scrollIntoView({behavior:'smooth'});
-  },200);
+  setTimeout(()=> page3.scrollIntoView({behavior:'smooth'}),200);
 });
 
-/* also show page3 when user scrolls near bottom of page2 */
-let page2Observed=false;
-window.addEventListener('scroll', ()=> {
-  if(!page2Observed && page2.classList.contains('active')){
-    const y = window.scrollY + window.innerHeight;
-    const tot = document.body.scrollHeight;
-    // if user scrolls beyond midpoint, reveal page3
-    if(y > tot - (window.innerHeight/2) ){
-      page3.classList.add('active');
-      page2Observed = true;
-    }
-  }
-});
-
-/* ---------- Hearts generator ---------- */
+/* ---------- HEARTS ---------- */
 function spawnHearts(n=6){
   const container = document.getElementById('hearts');
   for(let i=0;i<n;i++){
-    const h = document.createElement('div');
-    h.className='heart';
-    // randomize position and size/duration
-    const left = Math.random()*96 + '%';
-    const size = 10 + Math.random()*30;
-    const delay = Math.random()*1.2;
-    const dur = 3 + Math.random()*3;
-    h.style.left = left;
-    h.style.bottom = '-20px';
-    h.style.width = size+'px';
-    h.style.height = size+'px';
-    h.style.opacity = 0.9;
-    h.style.animationDuration = dur+'s';
-    h.style.animationDelay = delay+'s';
+    const h = document.createElement('div'); h.className='heart';
+    const left = Math.random()*96 + '%'; const size = 10 + Math.random()*30;
+    const delay = Math.random()*1.2; const dur = 3 + Math.random()*3;
+    h.style.left = left; h.style.bottom = '-20px'; h.style.width = size+'px'; h.style.height = size+'px';
+    h.style.opacity = 0.9; h.style.animationDuration = dur+'s'; h.style.animationDelay = delay+'s';
     container.appendChild(h);
-    // remove after animation
     setTimeout(()=>{ h.remove(); }, (delay+dur)*1000 + 200);
   }
 }
-
-/* spawn slow hearts in background repeatedly */
 setInterval(()=> spawnHearts(3), 2500);
+window.addEventListener('load', ()=> spawnHearts(6));
 
-/* ---------- Simple fake audio progress (since no audio file) ---------- */
+/* ---------- AUDIO PLAYER (custom) ---------- */
+const audio = document.getElementById('audio');
 const playBtn = document.getElementById('playBtn');
 const progBar = document.getElementById('progBar');
 const tcur = document.getElementById('tcur');
 const tdur = document.getElementById('tdur');
-const audio = document.getElementById('audio');
-
-let playing=false;
-let fakePos=0;
-const totalSeconds = 151; // 2:31 -> 151s
 
 function secToTime(s){
-  const m = Math.floor(s/60);
-  const ss = Math.floor(s%60).toString().padStart(2,'0');
+  const m = Math.floor(s/60); const ss = Math.floor(s%60).toString().padStart(2,'0');
   return m+':'+ss;
 }
-tdur.textContent = secToTime(totalSeconds);
 
-playBtn.addEventListener('click', ()=>{
-  if(!playing){
-    playing = true;
-    playBtn.textContent='▌▌';
-    // fake progress
-    playTick = setInterval(()=>{
-      fakePos++;
-      if(fakePos>totalSeconds){ clearInterval(playTick); playing=false; playBtn.textContent='▶'; fakePos=0; }
-      const pct = Math.min(100, (fakePos/totalSeconds)*100);
-      progBar.style.width = pct+'%';
-      tcur.textContent = secToTime(fakePos);
-    },1000);
-  } else {
-    // pause
-    playing=false;
-    playBtn.textContent='▶';
-    clearInterval(playTick);
-  }
+audio.addEventListener('loadedmetadata', ()=>{
+  tdur.textContent = secToTime(Math.floor(audio.duration) || 0);
 });
 
-/* ---------- Counter (from given date 22.08.2025 18:38) ---------- */
-const startDate = new Date(2025,7,22,18,38,0); // months 0-indexed -> 7 = August
+let progressInterval = null;
+playBtn.addEventListener('click', ()=>{
+  if(audio.paused){
+    audio.play();
+    playBtn.textContent='▌▌';
+    playBtn.classList.add('playing');
+    // update progress every 250ms for smoothness
+    progressInterval = setInterval(()=> {
+      const pos = Math.floor(audio.currentTime || 0);
+      const pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+      progBar.style.width = pct + '%';
+      tcur.textContent = secToTime(pos);
+    }, 250);
+  } else {
+    audio.pause();
+    playBtn.textContent='▶';
+    clearInterval(progressInterval);
+  }
+});
+audio.addEventListener('ended', ()=>{
+  playBtn.textContent='▶';
+  progBar.style.width = '0%';
+  tcur.textContent = '0:00';
+  clearInterval(progressInterval);
+});
+
+/* ---------- COUNTER (gün/saat/dakika/saniye) ---------- */
+const startDate = new Date(2025,7,22,18,38,0); // 22 Aug 2025 18:38
 const elDays = document.getElementById('days');
 const elHours = document.getElementById('hours');
 const elMins = document.getElementById('minutes');
+const elSecs = document.getElementById('seconds');
 
 function updateCounter(){
   const now = new Date();
@@ -418,28 +304,27 @@ function updateCounter(){
   const days = Math.floor(diff / (3600*24));
   const hours = Math.floor((diff % (3600*24)) / 3600);
   const mins = Math.floor((diff % 3600) / 60);
+  const secs = diff % 60;
   elDays.textContent = days;
   elHours.textContent = hours.toString().padStart(2,'0');
   elMins.textContent = mins.toString().padStart(2,'0');
+  elSecs.textContent = secs.toString().padStart(2,'0');
 }
-updateCounter();
-setInterval(updateCounter, 1000*30);
+updateCounter(); setInterval(updateCounter, 1000);
 
-/* ---------- small accessibility: click video to mute/unmute ---------- */
-const bgVideo = document.getElementById('bgvideo');
-if(bgVideo){ bgVideo.muted = true; bgVideo.loop = true; }
-/* clicking background toggles mute (visual feedback via small flash) */
-document.addEventListener('keydown', (e)=>{
-  if(e.key === 'm'){ if(bgVideo) bgVideo.muted = !bgVideo.muted; }
-});
-
-/* ---------- Make name anim scale slower and more organic ---------- */
-/* (already CSS animated) */
-
-/* ---------- On load: simulate page1 entry hearts softly ---------- */
-window.addEventListener('load', ()=> spawnHearts(6));
-
+/* ---------- Load background fallback: try /mnt/data/... if background.jpg not present ---------- */
+(function tryFallbackBg(){
+  // If background.jpg fails to load (e.g. 404 on GH pages), try local container path (works here in test env)
+  const testImg = new Image();
+  testImg.onload = ()=>{/* ok */};
+  testImg.onerror = ()=>{
+    // try the local file path if available on this execution environment
+    const el = document.getElementById('bgWrap');
+    el.style.backgroundImage = "url('/mnt/data/background.jpg')";
+  };
+  testImg.src = 'background.jpg';
+})();
 </script>
 
 </body>
-  </html>
+</html>
